@@ -28,14 +28,14 @@ class movieService {
     }
 
     async deletedMovie() {
-        const deletedMovieId = await Promise.resolve(moviesMock[0].id)
+        const deletedMovieId = await this.mongDB.delete(this.collection, movieId)
         return deletedMovieId
     }
 
-    async patchedMovie() {
-        const patchedMovieId = await Promise.resolve(moviesMock[0].id)
-        return patchedMovieId
-    }
+    // async patchedMovie() {
+    //     const patchedMovieId = await this.mongDB.patch(this.collection, movieId, movie)
+    //     return patchedMovieId
+    // }
 }
 
 module.exports = movieService
