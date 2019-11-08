@@ -1,7 +1,7 @@
 const express = require('express')
 const MoviesService = require('../services/movies')
 const { movieIdSchema, createMovieSchema, updateMovieSchema } = require('../utils/schemas/movies')
-const validationHandler = require('../utils/middleware/validationHandlers')
+const validationHandler = require('../utils/middleware/validationHandler')
 
 function moviesApi(app) {
     const router = express.Router()
@@ -14,7 +14,7 @@ function moviesApi(app) {
 
         try {
             const movies = await moviesService.getMovies({ tags })
-            throw new Error('Error getting movies')
+            //throw new Error('Error getting movies')
 
             res.status(200).json({
                 data: movies,
@@ -86,21 +86,21 @@ function moviesApi(app) {
         }
     })
 
-    router.patch('/:movieId', async function(req, res, next) {
-        const { movieId } = req.params
-        const { body: movie } = req
+    // router.patch('/:movieId', async function(req, res, next) {
+    //     const { movieId } = req.params
+    //     const { body: movie } = req
 
-        try {
-            const patchedMovieId = await moviesService.patchedMovie({ movieId, movie })
+    //     try {
+    //         const patchedMovieId = await moviesService.patchedMovie({ movieId, movie })
 
-            res.status(200).json({
-                data: patchedMovieId,
-                message: 'movie patched'
-            })
-        } catch(err) {
-            next(err)
-        }
-    })
+    //         res.status(200).json({
+    //             data: patchedMovieId,
+    //             message: 'movie patched'
+    //         })
+    //     } catch(err) {
+    //         next(err)
+    //     }
+    // })
 }
 
 module.exports = moviesApi
